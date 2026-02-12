@@ -1,0 +1,45 @@
+   Create Procedure Insert_Update_Customer 
+  @CustomerID int ,
+  @FirstName varchar(20),
+  @LastName Varchar (20),
+  @Location varchar (20)
+  as
+  Begin 
+
+  if exists ( Select * from customer where CustomerID = @CustomerID)
+  begin
+  update Customer set  
+    CustomerID = @CustomerID,
+    FirstName = @FirstName ,
+    LastName = @LastName,
+    City =@Location 
+
+
+   where (CustomerID = @CustomerID)
+   Print 'A record is Update in Database '
+  end
+
+  --Find duplicate records
+
+  Elseif exists (
+  select * from Customer 
+  where 
+  @customerid =CustomerID or
+  @firstname = FirstName or
+  @lastname = LastName or
+  @Location = City
+  )
+  Print 'Record already Exist '
+
+
+  Else 
+  Begin
+
+  Insert into Customer 
+  values (@CustomerID,@FirstName,@LastName,@Location)
+
+  Print 'New record is Insert in Database'
+
+  end 
+
+  End
