@@ -1,0 +1,30 @@
+-- Joins ---
+-- inner join 
+
+ select * from Customer
+ select * from Products
+ select * from Shoping
+  
+ -- we have three table 
+ -- Customer and Product have One to Many relation with Shoping 
+ -- Customer and Product has Many to Many relation with each other (Shoping Junction table)
+
+ Select * from Shoping as S 
+ 
+ inner join Customer as C 
+ on C.CustomerID = S.CustomerID
+
+ -- we join these two table on the base of the customer ID in both table or you can specify the column common in both table 
+ -- we can specify any column instead of * .we want to see in these both table 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+ -- if we want to join all three table 
+ select * from Shoping as S  --as S is the alias S is now a short name for Shoping table 
+ 
+ inner join Customer as C 
+ on S.CustomerID = C.CustomerID
+ 
+ inner join Products as P
+ on P.ProductID = S.ProductID
+
+ -- we can specify the column we want to see  from all three table 
