@@ -1,0 +1,22 @@
+--Masking-- 
+-- we use masking to hide our sensitive data in the Database 
+-- we run this query in our main server it maked the data for the user_login 
+
+
+Alter table [Table_name ]
+Alter Column [Column-name]
+Add masked with (Function ='default()')
+
+--Example 
+--if want to hide the customer name (or any column)
+
+Alter Table Customers 
+Alter Column FisrtName 
+add masked with (function='default()')
+
+--REMOVE Masking
+ ALTER TABLE Customer 
+ALTER COLUMN FastName DROP MASKED;
+
+-- we we run this the in main sever .In the User_Login the Firstname column is hide as XXXXX
+-- Function=deafult() replace the value with XXXX
