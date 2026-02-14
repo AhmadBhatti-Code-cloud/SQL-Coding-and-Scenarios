@@ -1,0 +1,35 @@
+--Relation (one to many)
+--let we have two table Customer and  order
+-- (one to many ) that one customer may have many order at a time
+
+
+create table Customers 
+( CustomerID int primary key ,
+FirstName varchar(50),
+LastName varchar (50),
+City varchar(50),
+)
+insert into (CustomerID,FirstName,LastName,City)
+values 
+(1,'Ahmad','Coding','New York')
+... -- you can add more data 
+
+
+
+
+-- if we add a primary of a table into another table with its value it is callled foreign key and we make  one to Many relation 
+-- between Customer ID 
+
+create table Orders
+(orderID int primary key ,
+order_price int ,
+order_adress varchar,
+customerID int , -- primary key of the Customer Table used as foreign key 
+foreign key (CustomerID) references Customers(CustomerID)
+)
+insert into (orderID,order_price,order_adress,customerID)
+values 
+(001,2000,'New York',1)
+
+
+
