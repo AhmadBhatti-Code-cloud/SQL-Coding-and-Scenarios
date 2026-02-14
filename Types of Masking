@@ -1,0 +1,44 @@
+PARTIAL MASKING:
+--use dfor Passwords ,Credit Card Numbers
+
+ALTER TABLE Customer
+ALTER COLUMN LastName VARCHAR(50) 
+MASKED WITH (FUNCTION = 'partial(1,"*****",0)');
+
+--output 1*****0
+
+--REMOVE MASKING
+ ALTER TABLE Customer 
+ALTER COLUMN LastName DROP MASKED;
+
+---------------------------------------------------------
+FULL MASKING :
+--use for any inportant Data
+
+ALTER TABLE Customer
+ALTER COLUMN LastName VARCHAR(50) 
+MASKED WITH (FUNCTION = 'default()');
+
+--OUTPUT = XXXXXXXX
+
+--REMOVE MASKING 
+ ALTER TABLE Customer 
+ALTER COLUMN LastName DROP MASKED;
+
+--------------------------------------------------------
+RANDOM MASKING :
+--Add random Numbes instead of Code and Password
+
+ALTER TABLE Customer
+ALTER COLUMN LastName VARCHAR(50) 
+MASKED WITH (FUNCTION = 'random(1000,5000)');
+
+  OUTPUT=Show random number from range x,y instead of data 
+
+
+--REMOVE MASKING
+ ALTER TABLE Customer 
+ALTER COLUMN LastName DROP MASKED;
+
+
+
