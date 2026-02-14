@@ -1,0 +1,32 @@
+ROW_NUMBER()
+-- SEE ALL RECORDS INCLUDE DUPLICATE 
+
+select * , 
+ROW_NUMBER () over (partition by name ,Email order by CustomerID ) as rownum
+from Customers 
+
+-- WE SPECIFY THE COLUMN SUCH AS NAME ,EMAIL AND OTHER BECAUSE WE WANT TO GET ALL DATA FROM THESE ALSO ON THE BASE OF ID (PRIMARY KEY)
+
+----------------------------------------------------------------------------------------
+FETCH THE RECORDS REPEAT MORE THAN ONCE 
+--CTE IS JUST A NAME HERE 
+WITH CTE AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY Name, Email  ORDER BY CustomerID) AS rn        -- WE GIVE A NAME "rn" TO THIS CODE AS ALIAS
+    FROM  Customers
+)
+ SELECT * FROM CTE
+WHERE rn > 1;
+
+-- WE ADD A CONDITION IN SELECT  TO FETCH RECORDS THAT   "rn" (Fetch records) that SHOW REPEAT RECORDS THAT REPEATS more than once 
+ ----------------------------------------------------------------------------------------------------
+DELETE RECORDS ENTER MORE THAN ONCE 
+
+WITH CTE AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY Name, Email  ORDER BY CustomerID) AS rn
+    FROM  Customers
+)
+ DELETE FROM CTE      --- WE JUST ADD A DELETE STATEMENT  INSTEAD OF SELECT 
+WHERE rn > 1;
+
